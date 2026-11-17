@@ -24,3 +24,27 @@ module.exports.receiveTelemetry = (req,res)=> {
         });
     }
 }
+
+
+module.exports.receiveBulkTelemetry = async (req, res) => {
+    try {
+        const { readings } = req.body;
+
+        const result = await storeMultipleTelemetry(readings);
+
+        return res.status(201).json({
+            success: true,
+            message: "Bulk telemetry data stored successfully",
+            insertedCount: result.insertedCount,
+            insertedIds: result.insertedIds
+        });
+
+    } catch (error) {
+        console.error("Bulk telemetry controller error:", error.message);
+
+        return res.status(500).json({
+            success: false,
+            message: "Failed to store bulk telemetry data"
+        });
+    }
+};
