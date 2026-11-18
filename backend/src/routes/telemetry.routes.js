@@ -1,6 +1,6 @@
 const express = require("express");
 const { healthCheck,receiveTelemetry,receiveBulkTelemetry }= require("../controllers/telemetry.controller");
-const validateTelemetryDataMiddleware = require("../middlewares/validateTelemetryData.middleware");
+const validateTelemetryDataMiddleware = require("../middleware/validateTelemetry.js");
 const telemetryRouter = express.Router();
 
 
